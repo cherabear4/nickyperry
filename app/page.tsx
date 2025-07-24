@@ -1,11 +1,12 @@
 'use client'
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X, Star, Phone, Mail, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
+import useIsUsingMobile from "@/app/hooks/useMobile";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const isMobile = useIsUsingMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -230,41 +231,41 @@ export default function Home() {
 
       {/* About Me Section */}
       <section id="about" className="py-0 relative bg-weight">
-        <div className="max-w-full bg-gray-800/80">
-          <div className="grid lg:grid-cols-2 items-stretch min-h-screen">
-            <div className="relative">
-              <div className="absolute inset-0"></div>
-              <div className="relative h-full flex items-center justify-center p-8">
-                <div className="w-[30rem] rounded-full overflow-hidden border-8">
-                  <img 
-                    src="https://static.wixstatic.com/media/cc76ef_6a6859a87a724f7f956976ec036c5ea5~mv2.jpg/v1/crop/x_136,y_76,w_385,h_385/fill/w_539,h_539,al_c,lg_1,q_80,enc_avif,quality_auto/2017-01-05%2013_41_01-2.jpg"
-                    alt="Nicky Perry"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+      <div className="max-w-full bg-gray-800/80">
+        <div className={`grid ${isMobile ? "" : "lg:grid-cols-2"} items-stretch min-h-screen`}>
+          {/* IMAGE SECTION */}
+          <div className={`${isMobile ? "py-8 flex justify-center" : "relative"}`}>
+            <div className={`${isMobile ? "" : "absolute inset-0"}`}></div>
+            <div className={`relative h-full flex items-center justify-center ${isMobile ? "p-0" : "p-8"}`}>
+              <div className={`rounded-full overflow-hidden border-8 w-[16rem] h-[16rem] ${isMobile ? "" : "w-[30rem] h-[30rem]"}`}>
+                <img 
+                  src="https://static.wixstatic.com/media/cc76ef_6a6859a87a724f7f956976ec036c5ea5~mv2.jpg/v1/crop/x_136,y_76,w_385,h_385/fill/w_539,h_539,al_c,lg_1,q_80,enc_avif,quality_auto/2017-01-05%2013_41_01-2.jpg"
+                  alt="Nicky Perry"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-            
-            <div className=" flex items-center p-12 lg:p-16">
-              <div>
-                <div className="text-right mb-8">
-                  <span className="text-white text-lg font-light tracking-widest raleway">ABOUT ME</span>
-                </div>
-                
-                <h2 className="text-4xl md:text-6xl font-bold text-red-500 mb-8 tracking-wide">
-                  NICKY PERRY
-                </h2>
-                
-                <div className="space-y-6 text-lg text-white leading-relaxed raleway">
-                  <p>
-                    I spent 10 LONG years on the diet roller coaster. Every time I lost 3 pounds, I would gain back 5. I finally figured out what works and what doesn't and changed my body in 9 months. For the past 4 years I've been helping women just like you build their dream physiques while still enjoying their favorite foods.
-                  </p>
-                </div>
+          </div>
+          
+          {/* TEXT SECTION */}
+          <div className={`flex items-center ${isMobile ? "p-6" : "p-12 lg:p-16"}`}>
+            <div className={isMobile ? "w-full text-center" : ""}>
+              <div className={`${isMobile ? "text-center" : "text-right"} mb-8`}>
+                <span className="text-white text-lg font-light tracking-widest raleway">ABOUT ME</span>
+              </div>
+              <h2 className="text-3xl md:text-6xl font-bold text-red-500 mb-8 tracking-wide">
+                NICKY PERRY
+              </h2>
+              <div className="space-y-6 text-base md:text-lg text-white leading-relaxed raleway">
+                <p>
+                  I spent 10 LONG years on the diet roller coaster. Every time I lost 3 pounds, I would gain back 5. I finally figured out what works and what doesn't and changed my body in 9 months. For the past 4 years I've been helping women just like you build their dream physiques while still enjoying their favorite foods.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Services Section */}
       <section id="services" className="py-20 bg-white">
