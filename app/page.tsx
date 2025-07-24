@@ -2,14 +2,19 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Star, Phone, Mail, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
 import useIsUsingMobile from "@/app/hooks/useMobile";
+import AboutSection from "./Sections/About";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const isMobile = useIsUsingMobile();
+  const [scrollPos, setScrollPos] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      setScrollPos(window.scrollY);
       const sections = ['home', 'about', 'services', 'success', 'booty', 'testimonials', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
@@ -28,6 +33,7 @@ export default function Home() {
     };
 
     window.addEventListener('scroll', handleScroll);
+    AOS.init({ duration: 800 });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -148,7 +154,7 @@ export default function Home() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-pink-400/90 backdrop-blur-md">
+          <div className="md:hidden bg-red-300 backdrop-blur-md">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {[
                 { id: 'home', label: 'Home' },
@@ -173,7 +179,13 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen relative overflow-hidden bg-image">
+      <section id="home" className="min-h-screen relative overflow-hidden bg-[#DCAFB2]">
+      <img
+        src="https://i.imgur.com/bgReeWa.jpeg"
+        className={isMobile ? 'absolute top-0 left-0 w-full h-full object-contain scale-220' : 'absolute top-0 left-0 w-full h-full object-contain scale-[140%]'}
+        style={{transform: `translateY(${scrollPos * 0.5}px)`}}
+        alt="Background"
+      />
         {/* Navigation dots */}
         <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
           <div className="flex flex-col space-y-3">
@@ -229,15 +241,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Me Section */}
+      {isMobile ?
+      
+        <AboutSection 
+          personImg="https://static.wixstatic.com/media/cc76ef_6a6859a87a724f7f956976ec036c5ea5~mv2.jpg/v1/crop/x_136,y_76,w_385,h_385/fill/w_539,h_539,al_c,lg_1,q_80,enc_avif,quality_auto/2017-01-05%2013_41_01-2.jpg"
+          bgImg="https://static.wixstatic.com/media/cc76ef_d028076aa95143559171c64423b6541a~mv2.jpeg/v1/fill/w_980,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cc76ef_d028076aa95143559171c64423b6541a~mv2.jpeg"
+          name="Nicky Perry"
+          description="I spent 10 LONG years on the diet roller coaster. Every time I lost 3 pounds, I would gain back 5. I finally figured out what works and what doesn't and changed my body in 9 months. For the past 4 years I've been helping women just like you build their dream physiques while still enjoying their favorite foods."
+        />
+      :
       <section id="about" className="py-0 relative bg-weight">
       <div className="max-w-full bg-gray-800/80">
-        <div className={`grid ${isMobile ? "" : "lg:grid-cols-2"} items-stretch min-h-screen`}>
+        <div className={`grid lg:grid-cols-2 items-stretch min-h-screen`}>
           {/* IMAGE SECTION */}
-          <div className={`${isMobile ? "py-8 flex justify-center" : "relative"}`}>
-            <div className={`${isMobile ? "" : "absolute inset-0"}`}></div>
-            <div className={`relative h-full flex items-center justify-center ${isMobile ? "p-0" : "p-8"}`}>
-              <div className={`rounded-full overflow-hidden border-8 w-[16rem] h-[16rem] ${isMobile ? "" : "w-[30rem] h-[30rem]"}`}>
+          <div className="relative">
+            <div className="absolute inset-0"></div>
+            <div className="relative h-full flex items-center justify-center p-8">
+              <div className="rounded-full overflow-hidden border-8 w-[30rem] h-[30rem]">
                 <img 
                   src="https://static.wixstatic.com/media/cc76ef_6a6859a87a724f7f956976ec036c5ea5~mv2.jpg/v1/crop/x_136,y_76,w_385,h_385/fill/w_539,h_539,al_c,lg_1,q_80,enc_avif,quality_auto/2017-01-05%2013_41_01-2.jpg"
                   alt="Nicky Perry"
@@ -248,9 +268,9 @@ export default function Home() {
           </div>
           
           {/* TEXT SECTION */}
-          <div className={`flex items-center ${isMobile ? "p-6" : "p-12 lg:p-16"}`}>
-            <div className={isMobile ? "w-full text-center" : ""}>
-              <div className={`${isMobile ? "text-center" : "text-right"} mb-8`}>
+          <div className="flex items-center p-12 lg:p-16">
+            <div className="">
+              <div className="text-right mb-8">
                 <span className="text-white text-lg font-light tracking-widest raleway">ABOUT ME</span>
               </div>
               <h2 className="text-3xl md:text-6xl font-bold text-red-500 mb-8 tracking-wide">
@@ -266,13 +286,15 @@ export default function Home() {
         </div>
       </div>
     </section>
+      }
+
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
+      <section id="services" className="py-20 bg-gradient-to-b from-white to-red-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 tracking-wide">
-              MY <span className="text-red-500">SERVICES</span>
+              MY <span className="text-[#ff4747]">SERVICES</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto raleway">
               Choose the coaching style that fits your lifestyle and goals
@@ -284,7 +306,7 @@ export default function Home() {
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">01</span>
               </div>
-              <div className="relative z-10">
+              <div data-aos="fade-up" data-aos-delay="100" className="relative z-10">
                 <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">IN PERSON TRAINING</h3>
                 <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Face-to-face coaching with personalized attention and maximum accountability.
@@ -296,7 +318,7 @@ export default function Home() {
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">02</span>
               </div>
-              <div className="relative z-10">
+              <div data-aos="fade-up" data-aos-delay="200" className="relative z-10">
                 <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">ONLINE TRAINING</h3>
                 <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Custom workout plans and nutrition guidance delivered digitally worldwide.
@@ -308,7 +330,7 @@ export default function Home() {
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">03</span>
               </div>
-              <div className="relative z-10">
+              <div data-aos="fade-up" data-aos-delay="300" className="relative z-10">
                 <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">HYBRID TRAINING</h3>
                 <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Best of both worlds - in-person sessions combined with online support.
@@ -320,7 +342,7 @@ export default function Home() {
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">04</span>
               </div>
-              <div className="relative z-10">
+              <div data-aos="fade-up" data-aos-delay="400" className="relative z-10">
                 <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">HABIT COACHING</h3>
                 <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Build lasting lifestyle changes through proven habit formation techniques.
@@ -332,7 +354,7 @@ export default function Home() {
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">05</span>
               </div>
-              <div className="relative z-10">
+              <div data-aos="fade-up" data-aos-delay="500" className="relative z-10">
                 <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">CORPORATE WELLNESS</h3>
                 <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Comprehensive workplace health and fitness programs for your team's success.
@@ -352,7 +374,7 @@ export default function Home() {
         </div>
       </section>
       {/* Success Stories Section */}
-      <section id="success" className="py-20 bg-white">
+      <section id="success" className="py-20 bg-gradient-to-b from-red-50 to-red-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
@@ -400,7 +422,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-white">
+      <section id="testimonials" className="py-20 bg-gradient-to-b from-red-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
