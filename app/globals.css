@@ -9,6 +9,16 @@
   background-attachment: fixed;
 }
 
+@font-face {
+  font-family: 'Lulo';
+  src: url('../public/Lulo\ Clean\ W01\ One\ Bold.otf');
+}
+
+.lulo
+{
+  font-family: 'Lulo';
+}
+
 .raleway
 {
   font-family: "Raleway", sans-serif;
@@ -23,5 +33,12 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.peachbg
+{
+  background-image: url(https://i.imgur.com/bgReeWa.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
   background-attachment: fixed;
 }

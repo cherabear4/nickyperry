@@ -5,12 +5,15 @@ import useIsUsingMobile from "@/app/hooks/useMobile";
 import AboutSection from "./Sections/About";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useRouter } from "next/navigation";
+import yelp from '../public/yelp.png'
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const isMobile = useIsUsingMobile();
   const [scrollPos, setScrollPos] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -112,32 +115,69 @@ export default function Home() {
           <div className="flex justify-between items-center h-20">
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center justify-center w-full">
-              <div className="flex items-center space-x-12 text-white">
-                {[
-                  { id: 'home', label: 'Home' },
-                  { id: 'about', label: 'About' },
-                  { id: 'services', label: 'Services' },
-                  { id: 'success', label: 'Success Stories' },
-                  { id: 'booty', label: 'Booty Building' },
-                  { id: 'testimonials', label: 'Blog' },
-                  { id: 'contact', label: 'Contact' }
-                ].map((item) => (
+              <div className="flex items-center space-x-12 text-white raleway">
                   <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => scrollToSection("home")}
                     className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
                   >
-                    {item.label}
+                    Home
                   </button>
-                ))}
+
+                  <button
+                    onClick={() => scrollToSection("about")}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    About
+                  </button>
+                  <button
+                    onClick={() => scrollToSection("about")}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    Nicky In The News
+                  </button>
+                  <button
+                    onClick={() => scrollToSection("services")}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    Services
+                  </button>
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    Contact
+                  </button>
+                  <button
+                    onClick={() => router.push('/bootybuilding')}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    Booty Building
+                  </button>
+                  <button
+                    onClick={() => router.push('/blog')}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    Blog
+                  </button>
+                  <button
+                    onClick={() => router.push('/shop')}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    Shop Swag
+                  </button>
+                   <button
+                    onClick={() => router.push('/clients')}
+                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
+                  >
+                    Client Area
+                  </button>
               </div>
             </div>
 
             {/* Social Icons */}
             <div className="hidden md:flex items-center space-x-4 absolute right-8">
-              <Facebook className="text-white hover:text-pink-200 cursor-pointer" size={20} />
-              <Instagram className="text-white hover:text-pink-200 cursor-pointer" size={20} />
-              <Twitter className="text-white hover:text-pink-200 cursor-pointer" size={20} />
+              <Instagram onClick={() => window.open('https://www.instagram.com/nickybikini')} className="text-white hover:text-pink-200 cursor-pointer" size={20} />
+              <img onClick={() => window.open('https://www.yelp.com/biz/nicky-perry-fitness-oceanside')} src={yelp.src} alt="Instagram" className="w-[18px] h-[20px] cursor-pointer" />
             </div>
 
             {/* Mobile menu button */}
@@ -154,7 +194,7 @@ export default function Home() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-red-300 backdrop-blur-md">
+          <div className="md:hidden bg-red-300 backdrop-blur-sm">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {[
                 { id: 'home', label: 'Home' },
@@ -182,15 +222,20 @@ export default function Home() {
       <section id="home" className="min-h-screen relative overflow-hidden bg-[#DCAFB2]">
       <img
         src="https://i.imgur.com/bgReeWa.jpeg"
-        className={isMobile ? 'absolute top-0 left-0 w-full h-full object-contain scale-220' : 'absolute top-0 left-0 w-full h-full object-contain scale-[140%]'}
-        style={{transform: `translateY(${scrollPos * 0.5}px)`}}
+        className={isMobile ? 'absolute top-0 left-0 w-full h-full object-contain scale-220' : 'absolute top-0 left-0 w-full h-full object-contain scale-[110%]'}
+        style={{transform: `translateY(${scrollPos * 1}px)`}}
         alt="Background"
       />
         {/* Navigation dots */}
         <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
           <div className="flex flex-col space-y-3">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="w-2 h-2 rounded-full border border-white/50"></div>
+            {['home', 'about', 'services', 'success', 'booty', 'testimonials'].map((section, i) => (
+              <div 
+                key={i} 
+                className={`w-2 h-2 rounded-full ${activeSection === section ? 'bg-gray-300 border-0' : 'border border-gray-300'} transition-all duration-300 cursor-pointer`}
+                onClick={() => scrollToSection(section)}
+                title={section.charAt(0).toUpperCase() + section.slice(1)}
+              ></div>
             ))}
           </div>
         </div>
@@ -199,7 +244,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-left z-10">
-                <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-none tracking-tight ptp">
+                <h1 className="text-[45px] md:text-8xl font-black text-white mb-8 leading-none tracking-tight ptp lulo">
                   PANCAKES
                   <br />
                   TO
@@ -273,7 +318,7 @@ export default function Home() {
               <div className="text-right mb-8">
                 <span className="text-white text-lg font-light tracking-widest raleway">ABOUT ME</span>
               </div>
-              <h2 className="text-3xl md:text-6xl font-bold text-red-500 mb-8 tracking-wide">
+              <h2 className="text-3xl md:text-6xl font-bold text-red-500 mb-8 tracking-wide lulo">
                 NICKY PERRY
               </h2>
               <div className="space-y-6 text-base md:text-lg text-white leading-relaxed raleway">
@@ -281,6 +326,7 @@ export default function Home() {
                   I spent 10 LONG years on the diet roller coaster. Every time I lost 3 pounds, I would gain back 5. I finally figured out what works and what doesn't and changed my body in 9 months. For the past 4 years I've been helping women just like you build their dream physiques while still enjoying their favorite foods.
                 </p>
               </div>
+              <button onClick={() => router.push('/news')} className="bg-red-500 text-white px-8 py-4 font-semibold hover:bg-red-600 transition-all duration-300 tracking-wide raleway w-full mt-5">View Nicky In The News</button>
             </div>
           </div>
         </div>
@@ -290,73 +336,73 @@ export default function Home() {
 
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-gradient-to-b from-white to-red-50">
+      <section id="services" className="py-20 bg-transparent peachbg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 tracking-wide">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-wide lulo">
               MY <span className="text-[#ff4747]">SERVICES</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto raleway">
+            <p className="text-xl text-white max-w-3xl mx-auto raleway">
               Choose the coaching style that fits your lifestyle and goals
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div className="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100">
+            <div className="group relative p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100 bg-transparent backdrop-blur-sm">
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">01</span>
               </div>
               <div data-aos="fade-up" data-aos-delay="100" className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">IN PERSON TRAINING</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
+                <h3 className="text-2xl font-bold text-white   group-hover:text-red-600 mb-4 tracking-wide transition-colors">IN PERSON TRAINING</h3>
+                <p className="text-white group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Face-to-face coaching with personalized attention and maximum accountability.
                 </p>
               </div>
             </div>
             
-            <div className="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100">
+            <div className="group relative  p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100 bg-transparent backdrop-blur-sm">
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">02</span>
               </div>
               <div data-aos="fade-up" data-aos-delay="200" className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">ONLINE TRAINING</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
+                <h3 className="text-2xl font-bold text-white group-hover:text-red-600 mb-4 tracking-wide transition-colors">ONLINE TRAINING</h3>
+                <p className="text-white group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Custom workout plans and nutrition guidance delivered digitally worldwide.
                 </p>
               </div>
             </div>
             
-            <div className="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100">
+            <div className="group relative p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100 bg-transparent backdrop-blur-sm">
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">03</span>
               </div>
               <div data-aos="fade-up" data-aos-delay="300" className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">HYBRID TRAINING</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
+                <h3 className="text-2xl font-bold text-white group-hover:text-red-600 mb-4 tracking-wide transition-colors">HYBRID TRAINING</h3>
+                <p className="text-white group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Best of both worlds - in-person sessions combined with online support.
                 </p>
               </div>
             </div>
             
-            <div className="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100 md:col-span-2 lg:col-span-1">
+            <div className="group relative p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100 md:col-span-2 lg:col-span-1 bg-transparent backdrop-blur-sm">
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">04</span>
               </div>
               <div data-aos="fade-up" data-aos-delay="400" className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">HABIT COACHING</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
+                <h3 className="text-2xl font-bold text-white group-hover:text-red-600 mb-4 tracking-wide transition-colors">HABIT COACHING</h3>
+                <p className="text-white group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Build lasting lifestyle changes through proven habit formation techniques.
                 </p>
               </div>
             </div>
             
-            <div className="group relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100 md:col-span-2 lg:col-span-2">
+            <div className="group relative p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:bg-red-50 border border-gray-100 md:col-span-2 lg:col-span-2 bg-transparent backdrop-blur-sm">
               <div className="absolute top-4 right-4">
                 <span className="text-red-100 group-hover:text-red-200 text-6xl font-black transition-colors">05</span>
               </div>
               <div data-aos="fade-up" data-aos-delay="500" className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-800 group-hover:text-red-600 mb-4 tracking-wide transition-colors">CORPORATE WELLNESS</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 leading-relaxed raleway transition-colors">
+                <h3 className="text-2xl font-bold text-white group-hover:text-red-600 mb-4 tracking-wide transition-colors">CORPORATE WELLNESS</h3>
+                <p className="text-white group-hover:text-gray-700 leading-relaxed raleway transition-colors">
                   Comprehensive workplace health and fitness programs for your team's success.
                 </p>
               </div>
@@ -373,11 +419,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Success Stories Section */}
-      <section id="success" className="py-20 bg-gradient-to-b from-red-50 to-red-50">
+      <section id="success" className="py-20 bg-gradient-to-b from-white to-red-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide lulo">
               SUCCESS <span className="text-red-500">STORIES</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto raleway">
@@ -422,27 +469,27 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-gradient-to-b from-red-50 to-white">
+      <section id="testimonials" className="py-20 bg-gradient-to-b peachbg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-wide lulo">
               CLIENT <span className="text-red-500">TESTIMONIALS</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto raleway">
+            <p className="text-xl text-white max-w-3xl mx-auto raleway">
               Don't just take my word for it - hear from the amazing women I've had the privilege to work with
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col">
+              <div key={index} className="bg-transparent backdrop-blur-sm border border-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col">
                 <div className="flex text-yellow-400 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} size={20} fill="currentColor" />
                   ))}
                 </div>
                 
-                <p className="text-gray-700 mb-6 leading-relaxed italic raleway flex-1">
+                <p className="text-white mb-6 leading-relaxed italic raleway flex-1">
                   "{testimonial.text}"
                 </p>
                 
@@ -454,7 +501,7 @@ export default function Home() {
                   />
                   <div>
                     <h4 className="font-semibold text-gray-800">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-600 raleway">Verified Client</p>
+                    <p className="text-sm text-white raleway">Verified Client</p>
                   </div>
                 </div>
               </div>
@@ -467,7 +514,7 @@ export default function Home() {
       <section id="contact" className="py-20 bg-red-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-wide">
+            <h2 className="text-2xl md:text-5xl font-bold text-white mb-6 tracking-wide lulo">
               READY TO START YOUR TRANSFORMATION?
             </h2>
             <p className="text-xl text-red-100 max-w-3xl mx-auto raleway">
@@ -527,7 +574,7 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="bg-white/20 backdrop-blur-md rounded-lg p-8">
+            <div className="bg-white/20 backdrop-blur-sm rounded-lg p-8">
               <h3 className="text-2xl font-bold text-white mb-6 raleway">Send Me a Message</h3>
               
               <form className="space-y-6">
@@ -580,7 +627,7 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h3 className="text-3xl font-bold text-red-500 mb-4 tracking-wide">
+            <h3 className="text-3xl font-bold text-red-500 mb-4 tracking-wide lulo">
               Pancakes to Peaches
             </h3>
             <p className="text-gray-400 mb-6 raleway">
@@ -588,13 +635,7 @@ export default function Home() {
             </p>
             <div className="flex justify-center space-x-6 mb-8">
               <a href="#" className="text-gray-400 hover:text-red-400 transition-colors">
-                <Instagram size={24} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-red-400 transition-colors">
-                <Facebook size={24} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-red-400 transition-colors">
-                <Twitter size={24} />
+                <Instagram onClick={() => window.open('https://www.instagram.com/nickybikini')} size={24} />
               </a>
             </div>
             <p className="text-gray-500 text-sm raleway">
