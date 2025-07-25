@@ -7,6 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from "next/navigation";
 import yelp from '../public/yelp.png'
+import MainNav from "./Sections/Navigation";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -109,114 +110,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#DCAFB2' }}>
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center justify-center w-full">
-              <div className="flex items-center space-x-12 text-white raleway">
-                  <button
-                    onClick={() => scrollToSection("home")}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Home
-                  </button>
-
-                  <button
-                    onClick={() => scrollToSection("about")}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    About
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("about")}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Nicky In The News
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("services")}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Services
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("contact")}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Contact
-                  </button>
-                  <button
-                    onClick={() => router.push('/bootybuilding')}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Booty Building
-                  </button>
-                  <button
-                    onClick={() => router.push('/blog')}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Blog
-                  </button>
-                  <button
-                    onClick={() => router.push('/shop')}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Shop Swag
-                  </button>
-                   <button
-                    onClick={() => router.push('/clients')}
-                    className="text-white hover:text-pink-200 transition-colors font-light tracking-wide"
-                  >
-                    Client Area
-                  </button>
-              </div>
-            </div>
-
-            {/* Social Icons */}
-            <div className="hidden md:flex items-center space-x-4 absolute right-8">
-              <Instagram onClick={() => window.open('https://www.instagram.com/nickybikini')} className="text-white hover:text-pink-200 cursor-pointer" size={20} />
-              <img onClick={() => window.open('https://www.yelp.com/biz/nicky-perry-fitness-oceanside')} src={yelp.src} alt="Instagram" className="w-[18px] h-[20px] cursor-pointer" />
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white hover:text-pink-200 p-2"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-red-300 backdrop-blur-sm">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {[
-                { id: 'home', label: 'Home' },
-                { id: 'about', label: 'About' },
-                { id: 'services', label: 'Services' },
-                { id: 'success', label: 'Success Stories' },
-                { id: 'booty', label: 'Booty Building' },
-                { id: 'testimonials', label: 'Blog' },
-                { id: 'contact', label: 'Contact' }
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-3 py-2 text-white hover:text-pink-100 raleway"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen relative overflow-hidden bg-[#DCAFB2]">
@@ -561,14 +454,11 @@ export default function Home() {
               <div className="mt-8">
                 <h4 className="text-lg font-semibold text-white mb-4 raleway">Follow My Journey</h4>
                 <div className="flex space-x-4">
-                  <a href="#" className="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                  <a href="https://instagram.com/nickybikini" className="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
                     <Instagram className="text-white" size={24} />
                   </a>
-                  <a href="#" className="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                    <Facebook className="text-white" size={24} />
-                  </a>
-                  <a href="#" className="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                    <Twitter className="text-white" size={24} />
+                  <a href="https://www.yelp.com/biz/nicky-perry-fitness-oceanside" className="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                    <img src={yelp.src} alt="Instagram" className="w-[22px] h-[22px] cursor-pointer" />
                   </a>
                 </div>
               </div>
@@ -634,8 +524,9 @@ export default function Home() {
               Transforming lives one peach at a time 🍑
             </p>
             <div className="flex justify-center space-x-6 mb-8">
-              <a href="#" className="text-gray-400 hover:text-red-400 transition-colors">
+              <a href="#" className="text-white flex gap-3">
                 <Instagram onClick={() => window.open('https://www.instagram.com/nickybikini')} size={24} />
+                <img onClick={() => window.open('https://www.yelp.com/biz/nicky-perry-fitness-oceanside')} src={yelp.src} alt="Instagram" className="w-[18px] h-[22px] cursor-pointer" />
               </a>
             </div>
             <p className="text-gray-500 text-sm raleway">
