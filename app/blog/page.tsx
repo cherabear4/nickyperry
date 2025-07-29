@@ -1,5 +1,4 @@
 'use client'
-import { getAuth } from "firebase/auth";
 import BlogCard from "./components/BlogCard";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -29,7 +28,7 @@ const Blog = () => {
   const categories = ["All", "Booty Building", "Nutrition", "Training", "Mindset", "Health"];
 
   return (
-    <div className="antialiased">
+    <div className="antialiased raleway">
       {/* HERO */}
       <section className="relative pt-20 pb-16 overflow-hidden">
         {/* full-bleed peach image */}

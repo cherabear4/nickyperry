@@ -399,9 +399,15 @@ export default function Home() {
                 </div>
               </div>
             ))}
+            
           </div>
+        </div> 
+        <div className="main mx-auto w-full flex justify-center pt-12 gap-5">
+          <button className="p-4 bg-red-500  text-white raleway">View More</button>
+          <button onClick={() => router.push("/bootybuilding")} className="p-4 bg-red-500  text-white raleway">View Booty Building</button>
         </div>
       </section>
+      
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-red-500">

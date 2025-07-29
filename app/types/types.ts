@@ -13,6 +13,8 @@ export interface ShopItem
 {
   name: string;
   price: number;
+  sizes: string[];
+  colors: string[];
   image: string;
   id: string;
   description: string;

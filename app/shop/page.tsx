@@ -29,7 +29,7 @@ const Blog = () => {
   const categories = ["All", "Men", "Women", "Kids"];
 
   return (
-    <div className="antialiased">
+    <div className="antialiased raleway">
       {/* HERO */}
       <section className="relative pt-20 pb-16 overflow-hidden">
         {/* full-bleed peach image */}
@@ -47,7 +47,7 @@ const Blog = () => {
             SHOP <span className="text-red-500">SWAG</span>
           </h1>
           <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto raleway">
-            Real talk about fitness, nutrition, and building the body and confidence you deserve
+            Step out in confidence with my hottest and latest drops.
           </p>
 
           {/* category filters */}
