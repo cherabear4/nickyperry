@@ -7,14 +7,10 @@ import { Post, ShopItem } from "@/app/types/types";
 import { ArrowBigLeft, Link } from "lucide-react";
 import ShopItemClient from "./ShopItemClient";
 
-type Props = { params: { id: string } };
+type Props = { params: Promise<{id: string}>};
 
-export default async function ShopItemPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const { id } = params;
+export default async function ShopItemPage({ params }: Props) {
+  const { id } = await params;
   if (!id) return notFound();
 
   // grab your shop item

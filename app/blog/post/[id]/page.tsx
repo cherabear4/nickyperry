@@ -6,7 +6,7 @@ import { db } from "@/app/util/firebase";
 import { Post } from "@/app/types/types"; 
 import { ArrowBigLeft, Link } from "lucide-react";
 
-type Props = { params: { id: string } };
+type Props = { params: Promise<{id: string}>};
 
 export default async function PostPage({ params }: Props) {
   const { id } = await params;
