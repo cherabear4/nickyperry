@@ -23,7 +23,7 @@ export default function ShopItemClient({ item }: Props) {
     setMainImage((i) => (i + 1) % item.images.length);
 
   return (
-    <main className="bg-[#DCAFB2] min-h-screen pb-12">
+    <main className="bg-[#DCAFB2] min-h-screen pb-12 raleway">
       <img
         src="https://i.imgur.com/bgReeWa.jpeg"
         className={isMobile ? 'absolute top-0 left-0 w-full h-full object-contain scale-220 z-10' : 'absolute top-0 left-0 w-full h-full object-contain scale-[110%] z-10'}
@@ -91,18 +91,18 @@ export default function ShopItemClient({ item }: Props) {
 
         {/* — Details & Form — */}
         <aside className="flex-1 space-y-4">
-          <h1 className="text-3xl font-bold text-gray-900">{item.name}</h1>
+          <h1 className="text-3xl font-bold text-white lulo">{item.name}</h1>
           <p className="text-2xl text-red-600">
             ${item.price.toFixed(2)}
           </p>
 
           <div className="space-y-4">
             <div>
-              <label className="block font-medium mb-1">Size</label>
+              <label className="block font-medium mb-1 text-white">Size</label>
               <select
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border border-white rounded px-3 py-2 text-white focus:text-black"
               >
                 {item.sizes.map((s) => (
                   <option key={s} value={s}>
@@ -113,11 +113,11 @@ export default function ShopItemClient({ item }: Props) {
             </div>
 
             <div>
-              <label className="block font-medium mb-1">Color</label>
+              <label className="block font-medium mb-1 text-white">Color</label>
               <select
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 focus:text-black text-white"
               >
                 {item.colors.map((c) => (
                   <option key={c} value={c}>
@@ -128,8 +128,8 @@ export default function ShopItemClient({ item }: Props) {
             </div>
 
             <div>
-              <label className="block font-medium mb-1">Quantity</label>
-              <div className="inline-flex items-center border rounded">
+              <label className="block font-medium mb-1 text-white">Quantity</label>
+              <div className="inline-flex items-center border rounded text-white">
                 <button
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
                   className="px-3 py-2 hover:bg-gray-100"

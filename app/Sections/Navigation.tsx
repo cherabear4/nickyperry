@@ -10,13 +10,12 @@ import yelp from "@/public/yelp.png";
 const NAV_LINKS = [
   { label: "Home", type: "scroll", target: "home" },
   { label: "About", type: "scroll", target: "about" },
-  { label: "Nicky In The News", type: "scroll", target: "about" },
   { label: "Services", type: "scroll", target: "services" },
   { label: "Contact", type: "scroll", target: "contact" },
   { label: "Booty Building", type: "route", target: "/bootybuilding" },
+  { label: "Nicky In The News", type: "scroll", target: "about" },
   { label: "Blog", type: "route", target: "/blog" },
   { label: "Shop Swag", type: "route", target: "/shop" },
-  { label: "Client Area", type: "route", target: "/clients" },
 ];
 
 const SOCIAL_LINKS = [

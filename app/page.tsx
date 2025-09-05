@@ -145,7 +145,7 @@ export default function Home() {
                   PEACHES
                 </h1>
                 
-                <p className="text-xl md:text-2xl text-white mb-12 font-light tracking-wide">
+                <p className="text-xl md:text-2xl text-white mb-12 font-light tracking-wide raleway">
                   <span className="raleway">Nicky Perry - BOOTY BUILDING & FAT LOSS SPECIALIST</span>
                 </p>
                 
