@@ -1,163 +1,178 @@
-// app/testimonials/page.tsx
-import React from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
-import ProgramTimeline from '../components/ProgramTimeline';
+
+const testimonials = [
+  {
+    quote:
+      "I told her what I wanted to accomplish and doubted it could happen because of my age. She took that on as her personal challenge. My arms don't look old anymore! My butt (ahem) looks and feels great!",
+    name: 'Juliana R.',
+    role: 'Verified Client',
+    avatar: '/images/avatar1.png',
+    rating: 5,
+  },
+  {
+    quote:
+      'I am so fortunate to have had my time with Nicky, and truly recommend her to anyone of any age and fitness level. She is transformative.',
+    name: 'JoAnn S.',
+    role: 'Verified Client',
+    avatar: '/images/avatar2.png',
+    rating: 5,
+  },
+  {
+    quote:
+      'Nicky came along and has managed to get me moving again. She went above and beyond by ordering meals for me at a local health food delivery service, calculating the macros I needed to meet my goals.',
+    name: 'Rene P.',
+    role: 'Verified Client',
+    avatar: '/images/avatar3.png',
+    rating: 5,
+  },
+  {
+    quote:
+      'Nicky came along and has managed to get me moving again. She went above and beyond by ordering meals for me at a local health food delivery service, calculating the macros I needed to meet my goals.',
+    name: 'Rene P.',
+    role: 'Verified Client',
+    avatar: '/images/avatar3.png',
+    rating: 5,
+  },
+  {
+    quote:
+      'Nicky came along and has managed to get me moving again. She went above and beyond by ordering meals for me at a local health food delivery service, calculating the macros I needed to meet my goals.',
+    name: 'Rene P.',
+    role: 'Verified Client',
+    avatar: '/images/avatar3.png',
+    rating: 5,
+  },
+  {
+    quote:
+      'Nicky came along and has managed to get me moving again. She went above and beyond by ordering meals for me at a local health food delivery service, calculating the macros I needed to meet my goals.',
+    name: 'Rene P.',
+    role: 'Verified Client',
+    avatar: '/images/avatar3.png',
+    rating: 5,
+  },
+];
+
+function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] }) {
+  return (
+    <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl p-8 flex flex-col h-full">
+      <div className="flex mb-4" />
+      <p className="text-white italic mb-6 flex-grow">"{testimonial.quote}"</p>
+      <div className="flex items-center">
+        <Image
+          src={testimonial.avatar}
+          alt={testimonial.name}
+          width={48}
+          height={48}
+          className="rounded-full object-cover"
+        />
+        <div className="ml-4">
+          <p className="text-white font-semibold">{testimonial.name}</p>
+          <span className="text-gray-300 text-sm">{testimonial.role}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function TestimonialsPage() {
-  const successStories = [
-    {
-      name: "Name",
-      achievement: "Lost 35 lbs and gained confidence",
-      story:
-        "After years of crash dieting, Nicky taught me how to eat for my goals while still enjoying life. I've maintained my results for over 2 years now!",
-      before:
-        "https://static.wixstatic.com/media/cc76ef_5e78fccfbf584ebe9faacfc4f09e6e1f~mv2.jpg/v1/fill/w_314,h_314,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/cc76ef_5e78fccfbf584ebe9faacfc4f09e6e1f~mv2.jpg",
-      after:
-        "https://static.wixstatic.com/media/cc76ef_5e78fccfbf584ebe9faacfc4f09e6e1f~mv2.jpg/v1/fill/w_314,h_314,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/cc76ef_5e78fccfbf584ebe9faacfc4f09e6e1f~mv2.jpg",
-    },
-    {
-      name: "Name",
-      achievement: "Built curves and strength",
-      story:
-        "I wanted to build a strong, curvy physique. Nicky's program helped me gain muscle in all the right places while staying lean.",
-      before:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-      after:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-    },
-    {
-      name: "Name",
-      achievement: "Built curves and strength",
-      story:
-        "I wanted to build a strong, curvy physique. Nicky's program helped me gain muscle in all the right places while staying lean.",
-      before:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-      after:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-    },
-    {
-      name: "Name",
-      achievement: "Built curves and strength",
-      story:
-        "I wanted to build a strong, curvy physique. Nicky's program helped me gain muscle in all the right places while staying lean.",
-      before:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-      after:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-    },
-    {
-      name: "Name",
-      achievement: "Built curves and strength",
-      story:
-        "I wanted to build a strong, curvy physique. Nicky's program helped me gain muscle in all the right places while staying lean.",
-      before:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-      after:
-        "https://static.wixstatic.com/media/cc76ef_3b1055a201564f17909a5294cf2f77f7~mv2.jpg/v1/crop/x_0,y_242,w_2048,h_2060/fill/w_302,h_304,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2019-12-10%2007_01_18.jpg",
-    },
-  ];
-
   return (
-    <main className="relative flex flex-col min-h-screen bg-white w-full">
-      {/* Background */}
-      <img
-        src="https://i.imgur.com/bgReeWa.jpeg"
-        alt="Peach background"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
+    <>
+      <Head>
+        <title>Client Testimonials | Nicky Perry Fitness</title>
+        <meta
+          name="description"
+          content="Hear from the incredible women who have transformed their bodies and lives with Nicky Perry's coaching."
+        />
+      </Head>
+      <main className="font-sans">
+        {/* Hero section */}
+        <section className="relative min-h-[100svh] md:min-h-screen isolate">
+          {/* Background image */}
+          <Image
+            src="https://i.imgur.com/bgReeWa.jpeg"
+            alt="Peach background"
+            fill
+            priority
+            className="object-contain blur-md"
+          />
+          {/* Optional soft scrim for text contrast */}
+          <div className="absolute inset-0" />
 
-      {/* Header */}
-      <header className="relative z-10 mt-16 mb-4">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-6xl font-bold uppercase tracking-widest text-gray-800 text-center lulo pt-10">
-            Booty Building
-          </h1>
-          <p className="text-lg text-gray-800 font-semibold text-center p-4">
-            Don't just take it from me — here's what my clients have to say
-          </p>
-        </div>
-      </header>
-
-      {/* Success Stories — Horizontal Snap Strip */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
-        <section
-          id="success"
-          className="py-20 bg-gradient-to-b from-white/50 to-red-100 backdrop-blur-2xl rounded-lg"
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Fade edges for a premium feel (no-JS) */}
-            <div
-              className="relative"
-              style={{
-                WebkitMaskImage:
-                  'linear-gradient(90deg, transparent 0, black 4%, black 96%, transparent 100%)',
-                maskImage:
-                  'linear-gradient(90deg, transparent 0, black 4%, black 96%, transparent 100%)',
-              }}
-            >
-              <ul
-                className="
-                  flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-px-4
-                  
-                "
-              >
-                {successStories.map((story, index) => (
-                  <li
-                    key={index}
-                    className="snap-center shrink-0 w-[min(85vw,28rem)]"
-                    aria-label={`Success story ${index + 1}`}
-                  >
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden ring-1 ring-black/5">
-                      <div className="p-6">
-                        <div className="flex items-center gap-4">
-                          <div className="relative">
-                            <img
-                              src={story.before}
-                              alt={`${story.name} before`}
-                              className="w-40 h-40 object-cover rounded shadow-md"
-                            />
-                            <span className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                              Before
-                            </span>
-                          </div>
-
-                          <div className="text-3xl text-red-500">→</div>
-
-                          <div className="relative">
-                            <img
-                              src={story.after}
-                              alt={`${story.name} after`}
-                              className="w-40 h-40 object-cover rounded shadow-md"
-                            />
-                            <span className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                              After
-                            </span>
-                          </div>
-                        </div>
-
-                        <h3 className="text-2xl font-bold text-gray-800 mt-6">
-                          {story.name}
-                        </h3>
-                        <p className="text-lg font-semibold text-red-500 mb-2 raleway">
-                          {story.achievement}
-                        </p>
-                        <p className="text-gray-700 leading-relaxed raleway">
-                          {story.story}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Optional helper text */}
-            <p className="mt-4 text-center text-sm text-gray-600">
-              Swipe on mobile · Scroll horizontally on desktop
+          {/* Foreground content */}
+          <div className="relative z-10 container mx-auto px-6 py-28 md:py-40 text-center">
+            <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-widest text-[#e8564f]">
+              Client Testimonials
+            </h1>
+            <p className="mt-6 max-w-3xl mx-auto text-lg md:text-2xl text-gray-700">
+              Don&apos;t just take my word for it – hear from the amazing women I&apos;ve had the privilege to work with.
             </p>
           </div>
+
+          {/* Testimonials section (added horizontal scroll on mobile) */}
+          <section className="relative">
+            <div className="container mx-auto px-6">
+              {/* Mobile: horizontal snap strip */}
+              <div
+                className="md:hidden relative"
+                style={{
+                  WebkitMaskImage:
+                    'linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%)',
+                  maskImage:
+                    'linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%)',
+                }}
+              >
+                <ul className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-px-5 [-ms-overflow-style:none] [scrollbar-width:none]">
+                  {testimonials.map((t, idx) => (
+                    <li key={idx} className="snap-start shrink-0 w-[85vw]">
+                      <TestimonialCard testimonial={t} />
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-center text-sm text-gray-700">Swipe to see more</p>
+              </div>
+
+              {/* Desktop: classic grid */}
+              <div className="hidden md:flex gap-5 overflow-x-scroll items-stretch">
+                {testimonials.map((t, idx) => (
+                <div key={idx} className="w-[300px] flex-shrink-0">
+                  <TestimonialCard testimonial={t} className="h-full" />
+                  </div>
+                ))} 
+              </div>
+
+
+              {/* Button */}
+              <div className="mt-12 text-center">
+                <button className="bg-[#e8564f] hover:bg-[#d84a45] text-white uppercase tracking-wider py-3 px-8 rounded-full transition-colors">
+                  View More
+                </button>
+              </div>
+            </div>
+          </section>
         </section>
-      </div>
-    </main>
+
+        {/* Call to action */}
+        <section className="relative bg-[#e8564f] text-white py-20">
+          <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
+            <div className="max-w-xl">
+              <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-wider">
+                Ready to start your transformation?
+              </h2>
+              <p className="mt-4 text-lg md:text-xl">
+                Let&apos;s chat about your goals and create a plan that works for your lifestyle.
+              </p>
+            </div>
+            <div>
+              <a
+                href="/contact"
+                className="bg-white text-[#e8564f] hover:bg-gray-100 font-bold py-3 px-8 rounded-full uppercase tracking-wider transition-colors"
+              >
+                Book a Consultation
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
